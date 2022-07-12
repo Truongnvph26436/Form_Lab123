@@ -7,27 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Form_Lab123.Controllers;
 using Form_Lab123.Models;
 
 namespace Form_Lab123.Views
 {
     public partial class ShowCar : Form
     {
-        private List<NewCar> _lstNewCars;
-
         public ShowCar()
         {
             InitializeComponent();
-        }
-
-        public ShowCar(List<NewCar> showList)
-        {
-            InitializeComponent();
-            _lstNewCars = showList;
-        }
-
-        private void ShowCar_Load(object sender, EventArgs e)
-        {
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,11 +29,22 @@ namespace Form_Lab123.Views
         {
             if (cb_hienthi.Checked)
             {
-                dgv_showCart.DataSource = _lstNewCars;
-                dgv_showCart.Columns[0].HeaderText = "Tên xe";
-                dgv_showCart.Columns[1].HeaderText = "Hãng xe";
-                dgv_showCart.Columns[2].HeaderText = "Giá cả";
-                dgv_showCart.Columns[3].HeaderText = "Số lượng";
+                FileController fileC = new FileController();
+                string path =
+                    @"C:\Users\ADMIN\OneDrive\Desktop\C#\C#3\lab_ass\Form_Lab123\Form_Lab123\Views\XMLFile1.xml";
+                var lstcar = fileC.ReadCarfromXML<NewCar>(path);
+                if (lstcar == null)
+                {
+                    MessageBox.Show("Không có dữ liệu để hiện thị vui lòng thêm xe");
+                }
+                else
+                {
+                    dgv_showCart.DataSource = lstcar;
+                    dgv_showCart.Columns[0].HeaderText = "Tên xe";
+                    dgv_showCart.Columns[1].HeaderText = "Hãng xe";
+                    dgv_showCart.Columns[2].HeaderText = "Giá cả";
+                    dgv_showCart.Columns[3].HeaderText = "Số lượng";
+                }
             }
             else
             {

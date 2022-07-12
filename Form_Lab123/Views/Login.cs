@@ -57,11 +57,7 @@ namespace Form_Lab123.Views
                 else
                 {
                     MessageBox.Show("Đăng nhập thành công");
-                    FileController fileC = new FileController();
-                    string path =
-                        @"C:\Users\ADMIN\OneDrive\Desktop\C#\C#3\lab_ass\Form_Lab123\Form_Lab123\Views\XMLFile1.xml";
-                    List<NewCar> lstcar = fileC.ReadCarfromXML<NewCar>(path);
-                    ShowCar showCar = new ShowCar(lstcar);
+                    ShowCar showCar = new ShowCar();
                     showCar.ShowDialog();
                 }
             }
